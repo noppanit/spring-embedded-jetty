@@ -1,0 +1,3 @@
+It's simple just to show how to embed Jetty and fire up Spring for testing
+
+1. mvn test
