@@ -1,6 +1,7 @@
 package com.noppanit;
 
 import org.junit.Before;
+import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.nio.SelectChannelConnector;
 import org.mortbay.jetty.servlet.Context;
@@ -19,6 +20,7 @@ public abstract class SimpleServiceInProcessTest {
         Server server = new Server();
         SelectChannelConnector connector = new SelectChannelConnector();
         connector.setPort(8888);
+        server.setConnectors(new Connector[] {connector});
 
         Context context = new Context(server, "/", Context.SESSIONS);
 
@@ -27,6 +29,7 @@ public abstract class SimpleServiceInProcessTest {
 
         ServletHolder servletHolder = new ServletHolder(dispatcherServlet);
         context.addServlet(servletHolder, "/*");
+        server.start();
     }
 
 }
