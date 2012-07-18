@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- This default handler takes care of each of the services enumerated below -->
+    <bean id="defaultHandlerMapping"
+          class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+    <!-- SpringHTTP Service Exposure -->
+
+    <bean id="simpleService"
+          class="com.noppanit.impl.SimpleServiceImpl">
+    </bean>
+
+    <bean name="/SimpleService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"
+          lazy-init="true">
+        <property name="service" ref="simpleService" />
+        <property name="serviceInterface"
+                  value="com.noppanit.interfaces.SimpleService" />
+    </bean>
+</beans>
